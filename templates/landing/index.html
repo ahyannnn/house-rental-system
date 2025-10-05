@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to PHOME</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/landing.css') }}?v=2" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">🏡 PHOME</div>
+        <div class="nav-links">
+            <a href="{{ url_for('auth_bp.login') }}" class="nav-btn login">Login</a>
+            <a href="{{ url_for('auth_bp.register') }}" class="nav-btn register">Register</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Discover Your New Home</h1>
+            <p>Helping renters find their perfect fit.</p>
+        </div>
+    </section>
+
+    <!-- Houses Section (React) -->
+    <section class="houses-section">
+        <h2>Available Houses</h2>
+        <div id="houses-root"></div>
+    </section>
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2>Why Choose PHOME?</h2>
+        <div class="features-container">
+            <div class="feature-card">
+                <h3>Easy Management</h3>
+                <p>Track payments, tenants, and properties in one dashboard.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Secure Payments</h3>
+                <p>Integrated payment system ensures your money is safe.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Accessible Anywhere</h3>
+                <p>View your rental properties and tenants from any device.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h2>About PHOME</h2>
+        <p>
+            PHOME is a modern rental management system designed for both property owners and tenants.
+            Our platform simplifies the process of tracking rentals, payments, and tenant information.
+            With an elegant interface, secure payment methods, and responsive design, PHOME is perfect
+            for everyone — young or elderly.
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 PHOME. All Rights Reserved.</p>
+    </footer>
+
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- React App -->
+    <script type="text/babel" src="{{ url_for('static', filename='js/app.jsx') }}"></script>
+</body>
+
+</html>

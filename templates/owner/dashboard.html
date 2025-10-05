@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ownerdashboard.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logotitle">
+                <img src="" alt="LOGO">
+                <h1>PHOME</h1>
+            </div>
+            <div class="linkholderbody">
+
+                <div class="linkholder active">
+                    <img src="{{ url_for('static', filename='icon/owner/dashboard.png') }}" alt="logo">
+                   <a href="{{ url_for('owner_dashboard') }}">Dashboard</a>
+                </div>
+
+                <div class="linkholder">
+                    <img src="{{ url_for('static', filename='icon/owner/billing.png') }}" alt="logo">
+                    <a href="{{ url_for('owner_billing') }}">Tenants</a>
+                </div>
+
+                <div class="linkholder">
+                    <img src="{{ url_for('static', filename='icon/owner/payment.png') }}" alt="logo">
+                    <a href="{{ url_for('owner_units') }}">Units</a>
+                </div>
+
+                <div class="linkholder">
+                    <img src="{{ url_for('static', filename='icon/owner/Contract.png') }}" alt="logo">
+                    <a href="{{ url_for('owner_transactions') }}">Transactions</a>
+                </div>
+
+                <div class="linkholder">
+                    <img src="{{ url_for('static', filename='icon/owner/billing.png') }}" alt="logo">
+                    <a href="{{ url_for('owner_billing') }}">Billing & Invoices</a>
+                </div>
+
+                <div class="linkholder">
+                    <img src="{{ url_for('static', filename='icon/owner/Support.png') }}" alt="logo">
+                    <a href="{{ url_for('owner_notification') }}">Notification Center</a>
+                </div>
+
+                <div class="linkholder">
+                    <img src="{{ url_for('static', filename='icon/owner/usermanagement.png') }}" alt="logo">
+                    <a href="{{ url_for('owner_user_management') }}">User Management</a>
+                </div>
+
+            </div>
+
+
+            <button id="logout">Log out</button>
+
+
+        </div>
+        <div class="header">
+            <h3>DASHBOARD</h3>
+            <div class="notifprofile">
+                <input type="text" placeholder="Search" class="searchboxdashboard">
+                <button class="notif-btn">
+                    <img src="{{ url_for('static', filename='icon/owner/notif.png') }}" alt="Notif">
+                </button>
+                <img src="" alt="profile">
+            </div>
+        </div>
+
+        <div class="main">
+           
+            <div class="cards-holder top-cards">
+                <div class="card">
+                    <h3>Total Tenants</h3>
+                    <p class="card-number">2</p>
+                </div>
+                <div class="card">
+                    <h3>Vacant Units</h3>
+                    <p class="card-number">3</p>
+                </div>
+                <div class="card">
+                    <h3>Pending Bills</h3>
+                    <p class="card-number">1</p>
+                </div>
+                <div class="card">
+                    <h3>Monthly Income</h3>
+                    <p class="card-number">$15,000</p>
+                </div>
+            </div>
+
+           
+            <div class="cards-holder bottom-cards">
+                <div class="card">
+                    <h3>Pending Applications</h3>
+                    <div class="inner-cards">
+                        <div class="inner-card">Juan Dela Cruz – House 2</div>
+                        <div class="inner-card">Maria Santos – House 5</div>
+                        <div class="inner-card">Pedro Reyes – House 8</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Recent Invoices</h3>
+                    <div class="inner-cards">
+                        <div class="inner-card">2025-09-20 | P250903</div>
+                        <div class="inner-card">2025-09-10 | P250902</div>
+                        <div class="inner-card">2025-09-02 | P250901</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</body>
+
+</html>
