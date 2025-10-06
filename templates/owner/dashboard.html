@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ownerdashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owner/dashboard.css') }}">
 </head>
 
 <body>
@@ -19,37 +19,37 @@
 
                 <div class="linkholder active">
                     <img src="{{ url_for('static', filename='icon/owner/dashboard.png') }}" alt="logo">
-                   <a href="{{ url_for('owner_dashboard') }}">Dashboard</a>
+                   <a href="{{ url_for('admin_bp.dashboard') }}">Dashboard</a>
                 </div>
 
                 <div class="linkholder">
                     <img src="{{ url_for('static', filename='icon/owner/billing.png') }}" alt="logo">
-                    <a href="{{ url_for('owner_billing') }}">Tenants</a>
+                    <a href="{{ url_for('admin_bp.tenants') }}">Tenants</a>
                 </div>
 
                 <div class="linkholder">
                     <img src="{{ url_for('static', filename='icon/owner/payment.png') }}" alt="logo">
-                    <a href="{{ url_for('owner_units') }}">Units</a>
+                    <a href="{{ url_for('admin_bp.units') }}">Units</a>
                 </div>
 
                 <div class="linkholder">
                     <img src="{{ url_for('static', filename='icon/owner/Contract.png') }}" alt="logo">
-                    <a href="{{ url_for('owner_transactions') }}">Transactions</a>
+                    <a href="{{ url_for('admin_bp.transactions') }}">Transactions</a>
                 </div>
 
                 <div class="linkholder">
                     <img src="{{ url_for('static', filename='icon/owner/billing.png') }}" alt="logo">
-                    <a href="{{ url_for('owner_billing') }}">Billing & Invoices</a>
+                    <a href="{{ url_for('admin_bp.billing') }}">Billing & Invoices</a>
                 </div>
 
                 <div class="linkholder">
                     <img src="{{ url_for('static', filename='icon/owner/Support.png') }}" alt="logo">
-                    <a href="{{ url_for('owner_notification') }}">Notification Center</a>
+                    <a href="{{ url_for('admin_bp.notification') }}">Notification Center</a>
                 </div>
 
                 <div class="linkholder">
                     <img src="{{ url_for('static', filename='icon/owner/usermanagement.png') }}" alt="logo">
-                    <a href="{{ url_for('owner_user_management') }}">User Management</a>
+                    <a href="{{ url_for('admin_bp.user_management') }}">User Management</a>
                 </div>
 
             </div>

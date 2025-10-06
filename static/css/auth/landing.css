@@ -374,19 +374,22 @@ body {
   font-weight: 400;
 }
 
-/* 📱 Responsive */
-@media (max-width: 768px) {
-  .features-section h2,
-  .about-section h2 {
-    font-size: 1.8rem;
+@media screen and (max-width: 768px) {
+  .navbar{
+    padding: 1rem 0.75rem;
   }
-
-  .feature-card {
-    padding: 30px 20px;
+  
+  .nav-links{
+    font-size: 5px;
   }
-
-  .about-section p {
-    font-size: 0.98rem;
+  
+  .nav-btn{
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+  }
+  
+  .nav-brand{
+    font-size: 15px;
   }
 }
 

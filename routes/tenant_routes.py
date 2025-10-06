@@ -2,7 +2,7 @@ from flask import Blueprint, render_template
 
 tenant_bp = Blueprint('tenant_bp', __name__)
 
-@tenant_bp.route('/')
+@tenant_bp.route('/dashboard')
 def dashboard():
     return render_template('tenant/Dashboard.html')
 
