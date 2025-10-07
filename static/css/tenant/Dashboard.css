@@ -1,8 +1,10 @@
 body {
     margin: 0;
     color: white;
+    font-family: 'Times New Roman', Times, serif;
 }
 
+/* GRID LAYOUT */
 .container {
     display: grid;
     grid-template-areas:
@@ -10,24 +12,19 @@ body {
         "sidebar main";
     grid-template-columns: 0.8fr 4fr;
     grid-template-rows: 10vh 90vh;
+    min-height: 100vh;
+    transition: all 0.3s ease;
 }
 
-.header {
-    grid-area: header;
-    color: black;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 50px;
-    padding-right: 20px;
-    align-items: center;
-}
-
+/* ===== SIDEBAR ===== */
 .sidebar {
     grid-area: sidebar;
     background-color: #061A53;
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
 }
 
 .logotitle {
@@ -36,25 +33,25 @@ body {
     justify-content: row;
     margin-top: 20px;
     margin-bottom: 70px;
+    gap: 10px;
 }
 
-.linkholder img {
-    padding-left: 20px;
-    height: 30px;
-    width: 30px;
-    margin-right: 15px;
+.logotitle img {
+    height: 40px;
+    width: 40px;
 }
 
-
-.linkholder a {
-    font-family: 'Times New Roman', Times, serif;
+.logotitle h1 {
+    font-size: 24px;
+    font-weight: bold;
     color: white;
-    text-decoration: none;
-    font-size: 20px;
-    padding: 20px 50px 20px 15px;
-    display: block;
 }
 
+.linkholderbody {
+    width: 100%;
+}
+
+/* LINK HOLDER */
 .linkholder {
     display: flex;
     flex-direction: row;
@@ -66,8 +63,87 @@ body {
     margin-inline: 20px;
 }
 
+.linkholder img {
+    padding-left: 20px;
+    height: 30px;
+    width: 30px;
+    margin-right: 15px;
+    transition: filter 0.2s ease;
+}
+
+.linkholder a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 50px 20px 15px;
+    display: block;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.linkholder:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+/* ACTIVE STATE */
+.linkholder.active {
+    background-color: white;
+    opacity: 1;
+}
+
+.linkholder.active a {
+    color: black;
+}
+
+/* 🔥 Icon turns black on white bg 🔥 */
 .linkholder.active img {
-    filter: brightness(0) saturate(100%);
+    filter: invert(1) brightness(1);
+}
+
+/* LOGOUT BUTTON */
+#logout {
+    padding-inline: 100px;
+    padding-block: 20px;
+    margin-top: auto;
+    font-size: 20px;
+    border-radius: 7px;
+    border: none;
+    background-color: white;
+    color: #061A53;
+    font-weight: bold;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+/* ===== HEADER ===== */
+.header {
+    grid-area: header;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 20px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #061A53;
+    cursor: pointer;
+    display: none; /* hidden on desktop */
+}
+
+.notifprofile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .notif-btn {
@@ -88,84 +164,220 @@ body {
     height: 20px;
 }
 
-
-.notifprofile{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.linkholder a {
-    font-family: 'Times New Roman', Times, serif;
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-    padding: 20px 50px 20px 15px;
-    display: block;
-    font-weight: bold;
-}
-
-
-.linkholder.active {
-    background-color: white;
-    opacity: 1;
-}
-
-.linkholder.active a {
-    color: black;
-}
-
-
-#logout {
-    padding-inline: 100px;
-    padding-block: 20px;
-    margin-top: 210px;
-    font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
-    border-radius: 7px;
-}
-
+/* ===== MAIN ===== */
+/* ===== MAIN ===== */
 .main {
     grid-area: main;
     color: black;
+    /* Nagdagdag ng padding at light background */
+    padding: 30px 50px; 
+    background-color: #F0F2F5; /* Light Gray Background */
 }
 
 .info {
     display: flex;
     justify-content: space-between;
-    padding-inline: 100px;
+    padding-inline: 50px; /* Binawasan ang padding */
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.info h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333; /* Darker text */
+    margin: 5px 0;
 }
 
 .carddashboardholder {
     display: flex;
     justify-content: space-between;
-    padding-top: 40px;
-    padding-inline: 100px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    padding-inline: 50px; /* Binawasan ang padding */
+    gap: 30px; /* Dinagdagan ang gap */
 }
 
 .carddashboardholder div {
+    flex: 1;
+    min-width: 250px; /* Mas malaking min-width */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-inline: 90px;
-    border-radius: 7px;
-    border: 1px solid black;
+    padding: 40px 20px;
+    border-radius: 10px; /* Mas modernong rounded corners */
+    border: none; /* Inalis ang border */
+    /* 🔥 PANG WEBSITE SHADOW 🔥 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.carddashboardholder div h3 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.carddashboardholder div h2 {
+    font-size: 38px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Card Colors (Mas Professional Look) */
 .carddashboard-Bills {
-    background-color: rgb(50, 50, 230);
+    background-color: #061A53; /* Primary Blue (Consistent with Sidebar) */
     color: white;
 }
 
 .carddashboard-DueDate {
-    background-color: rgb(199, 187, 14);
-    color: white;
+    background-color: #FFC107; /* Amber/Warning Color */
+    color: #333; /* Dark text on light background */
 }
 
 .carddashboard-Balance {
-    background-color: rgb(219, 161, 0);
+    background-color: #28A745; /* Success/Green Color */
     color: white;
+}
+
+/* Optional: Add hover effect for flair */
+.carddashboardholder div:hover {
+    transform: translateY(-5px); /* Konting lift effect */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Mas matingkad na shadow */
+}
+
+/* --- OVERLAY / DIMMER STYLE (General) --- */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black/grey */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    z-index: 998; /* Dapat mas mababa kaysa sa sidebar (999) */
+}
+
+#overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    /* --- GRID RESET --- */
+    .container {
+        grid-template-areas:
+            "header"
+            "main";
+        grid-template-columns: 1fr;
+    }
+
+    /* --- SIDEBAR (DRAWER) --- */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 65%; 
+        transform: translateX(-100%);
+        background-color: #061A53;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        transition: transform 0.3s ease-in-out;
+        z-index: 999;
+        padding: 0; 
+        overflow-y: auto;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    /* --- MENU BUTTON --- */
+    .menu-btn {
+        display: block;
+    }
+
+    /* --- LOGO / TITLE --- */
+    .logotitle {
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .logotitle h1 {
+        font-size: 20px;
+    }
+
+    /* --- LINKS --- */
+    .linkholder a {
+        font-size: 16px;
+        padding: 12px 15px; 
+    }
+
+    /* --- LOGOUT BUTTON FIX --- */
+    #logout {
+        font-size: 18px;
+        padding: 15px 30px; 
+        background-color: white;
+        color: #061A53;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        align-self: center;
+        display: block;
+        width: 80%; 
+        z-index: 1000;
+        margin-top: auto; /* ✅ stays at bottom of sidebar */
+        margin-bottom: 20px;
+    }
+
+    /* --- HEADER --- */
+    .header {
+        padding: 0 15px 0 20px;
+    }
+
+    /* --- MAIN AREA --- */
+    .main {
+        margin-left: -30px;
+        background-color: #F0F2F5;
+        text-align: left;
+        box-sizing: border-box;
+    }
+
+    /* --- INFO SECTION --- */
+    .info {
+        flex-direction: column; 
+        gap: 5px;
+        align-items: flex-start;
+        text-align: left;
+        padding-inline: 0;
+    }
+
+    /* --- CARD CONTAINER --- */
+    .carddashboardholder {
+        flex-direction: column; 
+        gap: 30px;
+        width: 100%;
+        padding-top: 15px;
+        box-sizing: border-box;
+    }
+
+    .carddashboardholder div {
+        width: 100%;
+        padding: 25px 20px;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .carddashboardholder div h2 {
+        font-size: 30px;
+    }
 }
