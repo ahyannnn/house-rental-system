@@ -4,95 +4,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tenant/Dashboard.css') }}">
-
+    <title>PHOME Dashboard</title>
+    <link rel="stylesheet" href="static\css\tenant\Dashboard.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <div class="logotitle">
-                <img src="" alt="LOGO">
-                <h1>PHOME</h1>
+    <div id="overlay"></div>
+        <div class="container">
+            <!-- SIDEBAR -->
+            <div class="sidebar" id="sidebar">
+                <div class="logotitle">
+                    <img src="" alt="LOGO">
+                    <h1>PHOME</h1>
+                </div>
+
+                <div class="linkholderbody">
+                    <div class="linkholder active">
+                        <img src="Sidebarlogo/dashboard.png" alt="logo">
+                        <a href="Dashboard.html">Dashboard</a>
+                    </div>
+
+                    <div class="linkholder">
+                        <img src="Sidebarlogo/billing.png" alt="logo">
+                        <a href="Bills.html">My Bills</a>
+                    </div>
+
+                    <div class="linkholder">
+                        <img src="Sidebarlogo/payment.png" alt="logo">
+                        <a href="Payment.html">Payment History</a>
+                    </div>
+
+                    <div class="linkholder">
+                        <img src="Sidebarlogo/Contract.png" alt="logo">
+                        <a href="Contract.html">Contract</a>
+                    </div>
+
+                    <div class="linkholder">
+                        <img src="Sidebarlogo/Support.png" alt="logo">
+                        <a href="Support.html">Support/Contact Owner</a>
+                    </div>
+                </div>
+
+                <button id="logout">Log out</button>
             </div>
-            <div class="linkholderbody">
 
-                <div class="linkholder active">
-                    <img src="{{ url_for('static', filename='icon/tenant/dashboard.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.dashboard') }}">Dashboard</a>
-                </div>
-
-                <div class="linkholder">
-                    <img src="{{ url_for('static', filename='icon/tenant/billing.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.bills') }}">My Bills</a>
-                </div>
-
-                <div class="linkholder">
-                    <img src="{{ url_for('static', filename='icon/tenant/payment.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.payment') }}">Payment History</a>
-                </div>
-
-                <div class="linkholder">
-                    <img src="{{ url_for('static', filename='icon/tenant/contract.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.contract') }}">Contract</a>
-                </div>
-
-                <div class="linkholder">
-                    <img src="{{ url_for('static', filename='icon/tenant/support.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.support') }}">Support/Contact Owner</a>
+            <!-- HEADER -->
+            <div class="header">
+                <button class="menu-btn" id="menu-btn">&#9776;</button>
+                <h3>DASHBOARD</h3>
+                <div class="notifprofile">
+                    <button class="notif-btn">
+                        <img src="Sidebarlogo/notif.png" alt="Notif">
+                    </button>
+                    <img src="" alt="profile" width="40" height="40" style="border-radius: 50%; background:#ccc;">
                 </div>
             </div>
 
+            <!-- MAIN -->
+            <div class="main">
+                <div class="info">
+                    <h3>Welcome back, Carlos!</h3>
+                    <h3>Unit: 1</h3>
+                    <h3>Lease: Since Jan 01, 2001</h3>
+                </div>
 
-            <button id="logout">Log out</button>
-
-
+                <div class="carddashboardholder">
+                    <div class="carddashboard-Bills">
+                        <h3>Current Bills</h3>
+                        <h2>2</h2>
+                    </div>
+                    <div class="carddashboard-DueDate">
+                        <h3>Due Date</h3>
+                        <h2>01-01-0001</h2>
+                    </div>
+                    <div class="carddashboard-Balance">
+                        <h3>Balance</h3>
+                        <h2>$10,000</h2>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="header">
-            <h3>DASHBOARD</h3>
-            <div class="notifprofile">
-                <button class="notif-btn">
-                    <img src="{{ url_for('static', filename='icon/tenant/notif.png') }}" alt="Notif">
-                </button>
-                <img src="{{ url_for('static', filename='icon/tenant/profile.png') }}" alt="profile">
-            </div>
-        </div>
-        <div class="main">
-            <div class="info">
-                <h3>Welcome back, Carlos!</h3>
-                <h3>Unit: 1</h3>
-                <h3>Lease: Since Jan 01, 2001</h3>
-            </div>
+    
 
-            <div class="carddashboardholder">
+    <script>
+        // Sidebar toggle for mobile
+        // Halimbawa ng logic:
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay'); // Kailangan ito!
 
-                <div class="carddashboard-Bills">
-                    <h3>Current Bills</h3>
-                    <h2>2</h2>
-                </div>
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('show');
+            overlay.classList.toggle('show'); // Importante!
+        });
 
-                <div class="carddashboard-DueDate">
-                    <h3>Due Date</h3>
-                    <h2>01-01-0001</h2>
-                </div>
-
-                <div class="carddashboard-Balance">
-                    <h3>Balance</h3>
-                    <h2>$10,000</h2>
-                </div>
-
-            </div>
-
-
-
-
-        </div>
-
-
-
-    </div>
-
+        // Para mawala pag kinlick ang dimmer
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+    </script>
 </body>
 
 </html>
