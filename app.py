@@ -1,16 +1,19 @@
 from flask import Flask
-from config import SQLALCHEMY_TRACK_MODIFICATIONS, SECRET_KEY
-from extensions import db  # ✅ import db from extensions
+from config import SQLALCHEMY_TRACK_MODIFICATIONS
+from extensions import db
+from dotenv import load_dotenv
+import os
 
 def create_app():
+    # ✅ Load environment variables from .env file
+    load_dotenv()
+
     app = Flask(__name__)
 
-    # ✅ Correct MSSQL connection string
-    app.config['SQLALCHEMY_DATABASE_URI'] = (
-        "mssql+pyodbc://@DESKTOP-6ORQFPB\\SQLEXPRESS/TRAMS?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
-    )
+    # ✅ Securely load credentials from .env
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
-    app.config['SECRET_KEY'] = SECRET_KEY
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
     # ✅ Initialize db with app
     db.init_app(app)
@@ -29,6 +32,7 @@ def create_app():
     app.register_blueprint(tenant_bp, url_prefix='/tenant')
     app.register_blueprint(admin_bp, url_prefix='/owner')
 
+    # ✅ Optional: List all routes (for debugging)
     @app.route('/list_routes')
     def list_routes():
         import urllib
@@ -45,5 +49,6 @@ def create_app():
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
+        # ✅ Create all tables if not exist
         db.create_all()
     app.run(debug=True)

@@ -1,5 +1,6 @@
-from extensions import db  # ✅ use this instead of from app import db
+from extensions import db
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
     __tablename__ = 'Users'
@@ -7,10 +8,17 @@ class User(db.Model):
     userid = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(255), nullable=False)  # ✅ name matches your DB
     phone = db.Column(db.String(20), nullable=False)
-    role = db.Column(db.String(20), default='Tenant')  # Default role is 'Tenant'
+    role = db.Column(db.String(20), default='Tenant')
     datecreated = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # ✅ Add helper methods
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
     def __repr__(self):
         return f"<User {self.email}>"
