@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.container {
+    display: grid;
+    grid-template-areas:
+        "sidebar header"
+        "sidebar main";
+    grid-template-columns: 0.8fr 4fr;
+    grid-template-rows: 10vh 90vh;
+}
+
+/* Header */
+.header {
+    grid-area: header;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+}
+
+/* Sidebar */
+.sidebar {
+    grid-area: sidebar;
+    background-color: #061A53;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Notification/Profile */
+.notif-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: #061A53;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.notif-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.notifprofile {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Main */
+.main {
+    grid-area: main;
+    padding: 20px 50px;
+    color: black;
+}
+
+/* Search & Add Unit */
+.unit-search {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.unit-search input {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.new-unit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.new-unit:hover {
+    background-color: #0056b3;
+}
+
+/* Unit Cards */
+.unit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.unit-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.unit-left h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #222;
+}
+
+.unit-left p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.unit-right .view-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.unit-right .view-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Status */
+.status.available {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.status.occupied {
+    color: #e74c3c;
+    font-weight: bold;
+}
