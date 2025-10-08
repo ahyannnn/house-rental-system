@@ -1,0 +1,137 @@
+/* ===== UNIFIED TENANT SIDEBAR ===== */
+.sidebar {
+    grid-area: sidebar;
+    background-color: #061A53;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+    height: 100vh;
+}
+
+/* LOGO & TITLE */
+.logotitle {
+    display: flex;
+    align-items: center;
+    justify-content: row;
+    margin-top: 20px;
+    margin-bottom: 70px;
+    gap: 10px;
+}
+
+.logotitle img {
+    height: 40px;
+    width: 40px;
+}
+
+.logotitle h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* LINK HOLDER BODY */
+.linkholderbody {
+    width: 100%;
+}
+
+/* NAV LINKS */
+.linkholder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    transition: background-color 0.2s ease, filter 0.2s ease;
+    opacity: 0.6;
+    margin-inline: 20px;
+}
+
+.linkholder img {
+    padding-left: 20px;
+    height: 30px;
+    width: 30px;
+    margin-right: 15px;
+    transition: filter 0.2s ease;
+}
+
+.linkholder a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 50px 20px 15px;
+    display: block;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.linkholder:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+.linkholder.active {
+    background-color: white;
+    opacity: 1;
+}
+
+.linkholder.active a {
+    color: black;
+}
+
+.linkholder.active img {
+    filter: invert(1) brightness(1);
+}
+
+/* LOGOUT BUTTON */
+#logout {
+    padding-inline: 100px;
+    padding-block: 20px;
+    margin-top: auto;
+    font-size: 20px;
+    border-radius: 7px;
+    border: none;
+    background-color: white;
+    color: #061A53;
+    font-weight: bold;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+/* RESPONSIVE SIDEBAR (Mobile) */
+@media (max-width: 900px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 65%;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        padding: 0;
+        overflow-y: auto;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .logotitle {
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .linkholder a {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    #logout {
+        font-size: 18px;
+        padding: 15px 30px;
+        width: 80%;
+        align-self: center;
+        margin-bottom: 20px;
+    }
+}

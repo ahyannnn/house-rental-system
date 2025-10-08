@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Units | PHOME</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tenant/BrowseUnits.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        {% include 'tenant/tenant_sidebar.html' %}
+
+        <div class="header">
+            <h3>BROWSE UNITS</h3>
+            <div class="notifprofile">
+                <button class="notif-btn">
+                    <img src="{{ url_for('static', filename='icon/tenant/notif.png') }}" alt="Notif">
+                </button>
+                <img src="" alt="profile">
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="unit-search">
+                <input type="text" placeholder="Search units">
+                
+            </div>
+
+            <div class="unit-grid">
+                <!-- Example Unit Card -->
+                <div class="unit-card">
+                    <div class="unit-left">
+                        <h3>Unit A101</h3>
+                        <p>Type: Studio</p>
+                        <p>Status: <span class="status available">Available</span></p>
+                        <p>Rent: ₱12,000/mo</p>
+                    </div>
+                    <div class="unit-right">
+                        <button class="view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="unit-card">
+                    <div class="unit-left">
+                        <h3>Unit B202</h3>
+                        <p>Type: 1-Bedroom</p>
+                        <p>Status: <span class="status occupied">Occupied</span></p>
+                        <p>Rent: ₱18,000/mo</p>
+                    </div>
+                    <div class="unit-right">
+                        <button class="view-btn">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Repeat unit-card dynamically with a loop in Flask -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

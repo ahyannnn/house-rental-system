@@ -10,44 +10,7 @@
 
 <body>
     <div class="container">
-        <div class="sidebar">
-            <div class="logotitle">
-                <img src="" alt="LOGO">
-                <h1>PHOME</h1>
-            </div>
-            <div class="linkholderbody">
-
-                <div class="linkholder">
-                    <img src="{{ url_for('static', filename='icon/tenant/dashboard.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.dashboard') }}">Dashboard</a>
-                </div>
-
-                <div class="linkholder">
-                    <img src="{{ url_for('static', filename='icon/tenant/billing.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.bills') }}">My Bills</a>
-                </div>
-
-                <div class="linkholder active">
-                    <img src="{{ url_for('static', filename='icon/tenant/payment.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.payment') }}">Payment History</a>
-                </div>
-
-                <div class="linkholder">
-                    <img src="{{ url_for('static', filename='icon/tenant/contract.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.contract') }}">Contract</a>
-                </div>
-
-                <div class="linkholder">
-                    <img src="{{ url_for('static', filename='icon/tenant/support.png') }}" alt="logo">
-                    <a href="{{ url_for('tenant_bp.support') }}">Support/Contact Owner</a>
-                </div>
-            </div>
-
-
-            <button id="logout">Log out</button>
-
-
-        </div>
+        {% include 'tenant/tenant_sidebar.html' %}
         <div class="header">
             <h3>PAYMENT</h3>
             <div class="notifprofile">

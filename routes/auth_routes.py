@@ -2,6 +2,9 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from extensions import db
 from models.user_model import User
 from werkzeug.security import generate_password_hash
+from models.application_model import Application
+from datetime import datetime
+
 
 auth_bp = Blueprint('auth_bp', __name__, template_folder='../templates/auth', static_folder='../static')
 
@@ -67,8 +70,23 @@ def register():
         db.session.commit()
 
         flash("Account created successfully! Please log in.", "success")
-        return redirect(url_for('auth_bp.login'))
+        
+        
+        # ✅ Also create default application record
+        new_application = Application(
+            fullname=fullname,
+            email=email,
+            phone=phone,
+            status='Pending',
+            unitID=None,
+            submissionDate=datetime.utcnow()
+        )
 
+        db.session.add(new_application)
+        db.session.commit()
+
+        flash("Account created successfully! Application status: Pending", "success")
+        return redirect(url_for('auth_bp.login'))
     return render_template('auth/register.html')
 
 
