@@ -1,24 +1,28 @@
-from flask import Flask
+from flask import Flask, jsonify, make_response
 from config import SQLALCHEMY_TRACK_MODIFICATIONS
 from extensions import db
 from dotenv import load_dotenv
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from io import BytesIO
+import pymysql
 import os
 
 def create_app():
-    # ✅ Load environment variables from .env file
+    # ✅ Load environment variables
     load_dotenv()
 
     app = Flask(__name__)
 
-    # ✅ Securely load credentials from .env
+    # ✅ SQLAlchemy (main ORM database)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'supersecretkey')
 
-    # ✅ Initialize db with app
+    # ✅ Initialize db
     db.init_app(app)
 
-    # Import models AFTER initializing db
+    # ✅ Import models AFTER db init
     from models.user_model import User
 
     # ✅ Register blueprints
@@ -43,12 +47,88 @@ def create_app():
             output.append(line)
         return "<br>".join(sorted(output))
 
+    # ✅ Additional: Connect to MySQL (FreeSQLDatabase.com)
+    mysql_conn_settings = {
+        'host': os.getenv('DB_HOST', 'sql12.freesqldatabase.com'),
+        'user': os.getenv('DB_USER', 'sql12801582'),
+        'password': os.getenv('DB_PASS', 'IvHCGAvMHy'),
+        'database': os.getenv('DB_NAME', 'sql12801582'),
+        'port': 3306
+    }
+
+    # -------------------- NEW ROUTES -------------------- #
+    @app.route('/api/users', methods=['GET'])
+    def get_users():
+        """Return all users from FreeSQLDatabase.com"""
+        try:
+            conn = pymysql.connect(**mysql_conn_settings)
+            cursor = conn.cursor(pymysql.cursors.DictCursor)
+            cursor.execute("SELECT * FROM Users")
+            users = cursor.fetchall()
+            cursor.close()
+            conn.close()
+            return jsonify(users)
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+    @app.route('/api/receipt/<int:order_id>', methods=['GET'])
+    def generate_receipt(order_id):
+        """Generate a PDF receipt from FreeSQLDatabase.com"""
+        try:
+            conn = pymysql.connect(**mysql_conn_settings)
+            cursor = conn.cursor(pymysql.cursors.DictCursor)
+            cursor.execute("""
+                SELECT o.OrderId, o.Date, o.TotalAmount, 
+                       u.FullName, u.Email,
+                       p.PaymentMethod, p.PaymentDate
+                FROM Orders o
+                JOIN Users u ON o.UserId = u.UserId
+                LEFT JOIN Payments p ON o.OrderId = p.OrderId
+                WHERE o.OrderId = %s
+            """, (order_id,))
+            order = cursor.fetchone()
+
+            if not order:
+                return jsonify({"error": "Order not found"}), 404
+
+            # ✅ Generate PDF in memory
+            pdf_buffer = BytesIO()
+            c = canvas.Canvas(pdf_buffer, pagesize=A4)
+
+            c.setFont("Helvetica-Bold", 16)
+            c.drawString(50, 800, "Receipt")
+            c.setFont("Helvetica", 12)
+            c.drawString(50, 780, f"Order ID: {order['OrderId']}")
+            c.drawString(50, 765, f"Customer: {order['FullName']}")
+            c.drawString(50, 750, f"Email: {order['Email']}")
+            c.drawString(50, 735, f"Order Date: {order['Date']}")
+            c.drawString(50, 720, f"Payment Method: {order['PaymentMethod'] or 'N/A'}")
+            c.drawString(50, 705, f"Payment Date: {order['PaymentDate'] or 'Pending'}")
+            c.setFont("Helvetica-Bold", 14)
+            c.drawString(50, 670, f"Total Amount: ₱{order['TotalAmount']:.2f}")
+            c.showPage()
+            c.save()
+
+            pdf_buffer.seek(0)
+            response = make_response(pdf_buffer.read())
+            response.headers['Content-Type'] = 'application/pdf'
+            response.headers['Content-Disposition'] = f'inline; filename=receipt_{order_id}.pdf'
+            return response
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+        finally:
+            if conn:
+                conn.close()
+
+    # ----------------------------------------------------- #
+
     return app
 
 
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        # ✅ Create all tables if not exist
         db.create_all()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
